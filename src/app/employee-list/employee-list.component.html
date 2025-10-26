@@ -1,0 +1,47 @@
+<div class="employee-list-container">
+  <div class="header">
+    <h2>Employee List</h2>
+  </div>
+
+  <div *ngIf="!loading">
+    <div *ngIf="employees.length > 0; else noEmployees" class="employee-table-wrapper">
+      <table class="employee-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let employee of employees">
+            <td>{{ employee.employeeName }}</td>
+            <td>{{ employee.locationDetails.locationName }}</td>
+            <td>{{ employee.contactEmail }}</td>
+            <td>{{ employee.contactPhone }}</td>
+            <td>{{ employee.address }}</td>
+            <td>
+              <button
+                class="action-btn edit-btn"
+                (click)="editEmployee(employee)"
+                [disabled]="isUser()"
+                [ngClass]="{'disabled-btn': isUser()}"
+                [title]="isUser() ? 'You do not have permission to edit' : 'Edit Employee'">
+                Edit
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ng-template #noEmployees>
+      <div class="not-found">
+        <p>No employees found.</p>
+      </div>
+    </ng-template>
+  </div>
+</div>

@@ -1,0 +1,188 @@
+/* navbar.component.css */
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap');
+
+.navbar {
+    background: #2c3e50;
+    padding: 15px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.navbar-brand {
+    font-family: 'Fjalla One', sans-serif;
+}
+
+.brand-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 24px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+.brand-link:hover {
+    color: #3498db;
+}
+
+.navbar-menu {
+    font-family: 'Fjalla One', sans-serif;
+}
+
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.nav-link {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    background: #34495e;
+    color: #3498db;
+}
+
+/* Dropdown Styles */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #2c3e50;
+    min-width: 200px;
+    list-style: none;
+    padding: 8px 0;
+    /* Adjusted padding for cleaner spacing */
+    margin: 0;
+    border-radius: 0 0 4px 4px;
+    /* Subtle rounding at bottom */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+    /* Softer shadow */
+    z-index: 999;
+    cursor: pointer;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-item {
+    display: block;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 8px 20px;
+    /* Reduced vertical padding for tighter spacing */
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    /* Slightly reduced letter spacing */
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background: #34495e;
+    color: #3498db;
+}
+
+.navbar-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background: #ffffff;
+    margin: 2px 0;
+    transition: all 0.3s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar-toggle {
+        display: flex;
+    }
+
+    .navbar-menu {
+        display: none;
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background: #2c3e50;
+    }
+
+    .navbar-menu.active {
+        display: block;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .nav-link {
+        display: block;
+        padding: 15px 20px;
+        border-bottom: 1px solid #34495e;
+    }
+
+    .dropdown-menu {
+        position: static;
+        width: 100%;
+        box-shadow: none;
+        background: #34495e;
+        padding: 0;
+        /* Remove padding in mobile view */
+        border-radius: 0;
+    }
+
+    .dropdown:hover .dropdown-menu {
+        display: none;
+        /* Disable hover effect on mobile */
+    }
+
+    .dropdown.active .dropdown-menu {
+        display: block;
+        /* Show when parent is active */
+    }
+
+    .dropdown-item {
+        padding: 12px 30px;
+        /* Slightly indented in mobile view */
+        border-bottom: 1px solid #3d566e;
+        /* Subtle separator */
+    }
+}

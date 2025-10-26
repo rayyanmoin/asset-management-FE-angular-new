@@ -1,0 +1,83 @@
+<div class="category-list-container">
+    <div class="header">
+        <h2>Add New Asset</h2>
+    </div>
+
+    <div class="category-table-wrapper">
+        <form (ngSubmit)="onSubmit()" class="add-form">
+            <div class="form-group">
+                <label for="assetName">Asset Name</label>
+                <input type="text" id="assetName" [(ngModel)]="asset.assetName" name="assetName" class="form-control"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="cost">Cost</label>
+                <input type="number" id="cost" [(ngModel)]="asset.cost" name="cost" class="form-control" required
+                    min="0">
+            </div>
+
+            <div class="form-group">
+                <label for="categoryId">Category</label>
+                <select id="categoryId" [(ngModel)]="asset.categoryId" name="categoryId" class="form-control" required>
+                    <option *ngFor="let category of categories" [value]="category.categoryId">
+                        {{ category.categoryName }}
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="assetHistory">Asset History</label>
+                <textarea id="assetHistory" [(ngModel)]="asset.assetHistory" name="assetHistory" class="form-control"
+                    rows="3" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="locationId">Location</label>
+                <select id="locationId" [(ngModel)]="asset.locationId" name="locationId" class="form-control" required>
+                    <option *ngFor="let location of locations" [value]="location.locationId">
+                        {{ location.locationName }}
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="year">Year</label>
+                <input type="text" id="year" [(ngModel)]="asset.year" name="year" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="employeeId">Employee</label>
+                <select id="employeeId" [(ngModel)]="asset.employeeId" name="employeeId" class="form-control" required>
+                    <option *ngFor="let employee of employees" [value]="employee.employeeId">
+                        {{ employee.employeeName }}
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="supplierId">Supplier</label>
+                <select id="supplierId" [(ngModel)]="asset.supplierId" name="supplierId" class="form-control" required>
+                    <option *ngFor="let supplier of suppliers" [value]="supplier.supplierId">
+                        {{ supplier.supplierName }}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" [(ngModel)]="asset.description" name="description" class="form-control"
+                    rows="3" required></textarea>
+            </div>
+
+            <button type="submit" class="action-btn edit-btn"
+                [disabled]="loading || categories.length === 0 || locations.length === 0 || employees.length === 0 || suppliers.length === 0">
+                {{ loading ? 'Adding...' : 'Add Asset' }}
+            </button>
+
+            <div class="message-container">
+                <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+                <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+            </div>
+        </form>
+    </div>
+</div>

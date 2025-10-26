@@ -1,0 +1,51 @@
+<div class="asset-details-container">
+  <div class="header">
+    <h2>Asset Details</h2>
+  </div>
+
+  <div *ngIf="!loading">
+    <div *ngIf="assets.length > 0; else noAssets" class="asset-list">
+      <div *ngFor="let asset of assets" class="details-card">
+
+        <!-- Basic Asset Info -->
+        <div class="info-section">
+          <h3>{{ asset.assetDetails.assetName }}</h3>
+          <p><strong>Category:</strong> {{ asset.assetDetails.categoryDetails.categoryName }}</p>
+          <p><strong>Location:</strong> {{ asset.locationDetails.locationName }}</p>
+          <p><strong>Cost:</strong> ${{ asset.assetDetails.cost }}</p>
+        </div>
+
+        <!-- Assignment Info -->
+        <div class="info-section">
+          <h4>Assignment</h4>
+          <p><strong>Employee:</strong> {{ asset.employeeDetails.employeeName }}</p>
+          <p><strong>Supplier:</strong> {{ asset.supplierDetails.supplierName }}</p>
+        </div>
+
+        <!-- Actions -->
+        <div class="actions">
+          <button
+            class="action-btn edit-btn"
+            (click)="editAsset(asset)"
+            [disabled]="isUser()"
+            [ngClass]="{ 'disabled-btn': isUser() }"
+            [title]="isUser() ? 'You do not have permission to edit' : 'Edit Asset'">
+            Edit Asset
+          </button>
+
+          <!-- Back button -->
+          <button class="action-btn back-btn" routerLink="/assetsList">
+            ← Back to Assets
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #noAssets>
+      <div class="not-found">
+        <p>No assets found.</p>
+        <button class="action-btn back-btn" routerLink="/assetsList">← Back to Assets</button>
+      </div>
+    </ng-template>
+  </div>
+</div>

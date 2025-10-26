@@ -1,0 +1,71 @@
+<div class="payment-list-container">
+    <div class="header">
+        <h2>Add New Payment</h2>
+    </div>
+
+    <form (ngSubmit)="onSubmit()" #paymentForm="ngForm">
+        <div class="form-group">
+            <label for="assetId">Asset</label>
+            <select id="assetId" [(ngModel)]="payment.assetId" name="assetId" class="form-control" required>
+                <option *ngFor="let asset of asset" [value]="asset.assetId">
+                    {{ asset.assetName }}
+                </option>
+            </select>
+        </div>
+
+                        <div class="form-group">
+                <label for="supplierId">Supplier</label>
+                <select id="supplierId" [(ngModel)]="payment.supplierId" name="supplierId" class="form-control" required>
+                    <option *ngFor="let supplier of suppliers" [value]="supplier.supplierId">
+                        {{ supplier.supplierName }}
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+            <label for="paymentMode">Payment Mode</label>
+            <select
+                id="paymentMode"
+                [(ngModel)]="payment.paymentMode"
+                name="paymentMode"
+                class="form-control"
+                required
+            >
+                <option value="">Select Payment Mode</option>
+                <option value="CASH">Cash</option>
+                <option value="CHEQUE">Cheque</option>
+            </select>
+            </div>
+
+            <div class="form-group">
+                <label for="paymentDate">Payment Date</label>
+                <input type="date" id="paymentDate" [(ngModel)]="payment.paymentDate" name="paymentDate" class="form-control" required>
+            </div>
+
+             <div class="form-group">
+                <label for="chequeNumber">Cheque Number</label>
+                <input type="text" id="chequeNumber" [(ngModel)]="payment.chequeNumber" name="chequeNumber" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="amount">Amount</label>
+                <input type="text" id="amount" [(ngModel)]="payment.amount" name="amount" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="amountToReturn">Amount To Return</label>
+                <input type="text" id="amountToReturn" [(ngModel)]="payment.amountToReturn" name="amountToReturn" class="form-control" required>
+            </div>
+
+
+            <button type="submit" class="action-btn edit-btn"
+                [disabled]="loading || asset.length === 0 || suppliers.length === 0">
+                {{ loading ? 'Adding...' : 'Add Payment' }}
+            </button>
+
+            <div class="message-container">
+                <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+                <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+            </div>
+        </form>
+    </div>

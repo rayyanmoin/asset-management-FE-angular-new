@@ -1,0 +1,43 @@
+<div class="category-list-container">
+  <div class="header">
+    <h2>Category List</h2>
+  </div>
+
+  <div *ngIf="!loading">
+    <div *ngIf="categories.length > 0; else noCategories" class="category-table-wrapper">
+      <table class="category-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Code</th>
+            <th>Description</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let category of categories">
+            <td>{{ category.categoryName }}</td>
+            <td>{{ category.categoryCode }}</td>
+            <td>{{ category.categoryDescription }}</td>
+            <td>
+              <button
+                class="action-btn edit-btn"
+                (click)="editCategory(category)"
+                [disabled]="isUser()"
+                [ngClass]="{'disabled-btn': isUser()}"
+                [title]="isUser() ? 'You do not have permission to edit' : 'Edit Category'">
+                Edit
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ng-template #noCategories>
+      <div class="not-found">
+        <p>No categories found.</p>
+      </div>
+    </ng-template>
+  </div>
+</div>

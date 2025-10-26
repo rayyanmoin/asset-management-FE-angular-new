@@ -1,0 +1,51 @@
+<div class="supplier-list-container">
+  <div class="header">
+    <h2>Supplier List</h2>
+  </div>
+
+  <div *ngIf="!loading">
+    <div *ngIf="suppliers.length > 0; else noSuppliers" class="supplier-table-wrapper">
+      <table class="supplier-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Contact Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>Registration No.</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let supplier of suppliers">
+            <td>{{ supplier.supplierName }}</td>
+            <td>{{ supplier.contactName }}</td>
+            <td>{{ supplier.contactEmail }}</td>
+            <td>{{ supplier.contactPhone }}</td>
+            <td>{{ supplier.address }}</td>
+            <td>{{ supplier.registrationNo }}</td>
+            <td>{{ supplier.status }}</td>
+            <td>
+              <button
+                class="action-btn edit-btn"
+                (click)="editSupplier(supplier)"
+                [disabled]="isUser()"
+                [ngClass]="{'disabled-btn': isUser()}"
+                [title]="isUser() ? 'You do not have permission to edit' : 'Edit Supplier'">
+                Edit
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ng-template #noSuppliers>
+      <div class="not-found">
+        <p>No suppliers found.</p>
+      </div>
+    </ng-template>
+  </div>
+</div>

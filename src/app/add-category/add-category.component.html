@@ -1,0 +1,37 @@
+<div class="category-list-container">
+    <div class="header">
+        <h2>{{ editMode ? 'Edit Category' : 'Add New Category' }}</h2>
+    </div>
+
+    <div class="category-table-wrapper">
+        <form (ngSubmit)="onSubmit()" class="add-form">
+            <div class="form-group">
+                <label for="categoryName">Category Name</label>
+                <input type="text" id="categoryName" [(ngModel)]="category.categoryName" name="categoryName"
+                    class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="categoryCode">Category Code</label>
+                <input type="text" id="categoryCode" [(ngModel)]="category.categoryCode" name="categoryCode"
+                    class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="categoryDescription">Description</label>
+                <textarea id="categoryDescription" [(ngModel)]="category.categoryDescription" name="categoryDescription"
+                    class="form-control" rows="3" required></textarea>
+            </div>
+
+            <button type="submit" class="action-btn edit-btn" [disabled]="loading">
+                {{ loading ? (editMode ? 'Updating...' : 'Adding...') : (editMode ? 'Update Category' : 'Add Category')
+                }}
+            </button>
+
+            <div class="message-container">
+                <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+                <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="category-list-container">
+    <div class="header">
+        <h2>Login</h2>
+    </div>
+
+    <div class="category-table-wrapper">
+        <form (ngSubmit)="onSubmit()" class="add-form">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" [(ngModel)]="credentials.username" name="username" class="form-control"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" [(ngModel)]="credentials.password" name="password"
+                    class="form-control" required>
+            </div>
+
+            <button type="submit" class="action-btn edit-btn" [disabled]="loading">
+                {{ loading ? 'Logging in...' : 'Login' }}
+            </button>
+
+            <div class="message-container">
+                <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+                <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+            </div>
+        </form>
+        <p>Don't have an account? <a href="/register">Register</a></p>
+    </div>
+</div>

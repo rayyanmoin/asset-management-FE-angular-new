@@ -1,0 +1,45 @@
+<div class="payment-list-container">
+    <div class="header">
+    <h2>Payment List</h2>
+    </div>
+
+    <!-- <div *ngIf="loading" class="loading">Loading...</div> -->
+
+    <div *ngIf="!loading">
+        <div *ngIf="payments.length > 0; else noPayments" class="payment-table-wrapper">
+            <table class="payment-table">
+                <thead>
+                    <tr>
+                        <th>paymentId</th>
+                        <th>Asset Name</th>
+                        <th>Supplier Name</th>
+                        <th>Cheque Number</th>
+                        <th>Payment Date</th>
+                        <th>Amount</th>
+                        <th>Amount to Return</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let payment of payments">
+                        <td>{{ payment.paymentId }}</td>
+                        <td>{{ payment.assetName }}</td>
+                        <td>{{ payment.supplierName }}</td>
+                        <td>{{ payment.chequeNumber }}</td>
+                        <td>{{ payment.paymentDate }}</td>
+                        <td>{{ payment.amount }}</td>
+                        <td>{{ payment.amountToReturn }}</td>
+                        
+                        
+                    
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <ng-template #noPayments>
+            <div class="not-found">
+                <p>No payments found.</p>
+            </div>
+        </ng-template>
+    </div>
+</div>

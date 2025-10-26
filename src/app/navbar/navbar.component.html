@@ -1,0 +1,122 @@
+<!-- navbar.component.html -->
+<nav class="navbar">
+    <div class="navbar-container">
+        <div class="navbar-brand">
+            <a href="/" class="brand-link">AssetSync</a>
+        </div>
+        <div class="navbar-menu">
+            <ul class="nav-links">
+                <!-- Show these items only when authenticated -->
+                <ng-container *ngIf="isAuthenticated">
+                    <li><a href="/" class="nav-link">Home</a></li>
+
+                    <!-- Assets menu - View for both, Add for ADMIN only -->
+                    <li class="dropdown">
+                        <a class="nav-link dropdown-toggle">Assets</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="assetDetails" class="dropdown-item">View Asset Details</a></li>
+                            <li><a href="assetsList" class="dropdown-item">View Assets</a></li>
+                            <li *ngIf="isAdmin()">
+                                <a href="addAssets" class="dropdown-item">Add Assets</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- Employee menu - View for both, Add for ADMIN only -->
+                    <li class="dropdown">
+                        <a class="nav-link dropdown-toggle">Employee</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="employeeList" class="dropdown-item">View Employees</a></li>
+                            <li *ngIf="isAdmin()">
+                                <a href="addEmployee" class="dropdown-item">Add Employee</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- Supplier menu - View for both, Add for ADMIN only -->
+                    <li class="dropdown">
+                        <a class="nav-link dropdown-toggle">Supplier</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="supplierList" class="dropdown-item">View Suppliers</a></li>
+                            <li *ngIf="isAdmin()">
+                                <a href="addSupplier" class="dropdown-item">Add Supplier</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li *ngIf="isAdmin()" class="dropdown">
+                        <a class="nav-link dropdown-toggle">Payment</a>
+                        <ul class="dropdown-menu">
+                            <li *ngIf="isAdmin()"><a href="paymentList" class="dropdown-item">View Payment</a></li>
+                            <li *ngIf="isAdmin()">
+                                <a href="addPayment" class="dropdown-item">Add Payment</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- Category menu - View for both, Add for ADMIN only -->
+                    <li class="dropdown">
+                        <a class="nav-link dropdown-toggle">Category</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="categoryList" class="dropdown-item">View Categories</a></li>
+                            <li *ngIf="isAdmin()">
+                                <a href="addCategory" class="dropdown-item">Add Category</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- Location menu - View for both, Add for ADMIN only -->
+                    <li class="dropdown">
+                        <a class="nav-link dropdown-toggle">Location</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="locationList" class="dropdown-item">View Locations</a></li>
+                            <li *ngIf="isAdmin()">
+                                <a href="addLocation" class="dropdown-item">Add Location</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ng-container>
+
+                <!-- Auth menu - always visible -->
+                <li class="dropdown">
+                    <a class="nav-link dropdown-toggle">
+                        <!-- Use stored icon value instead of calling function -->
+                        <ng-container [ngSwitch]="selectedIcon">
+                            <svg *ngSwitchCase="'user'" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            <svg *ngSwitchCase="'person'" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="8" r="5"></circle>
+                                <path d="M3 21v-2a6 6 0 0 1 6-6h6a6 6 0 0 1 6 6v2"></path>
+                            </svg>
+                            <svg *ngSwitchCase="'profile'" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"></path>
+                                <path d="M18 21v-2a6 6 0 0 0-12 0v2"></path>
+                            </svg>
+                        </ng-container>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <!-- Show Login/Register when not authenticated -->
+                        <ng-container *ngIf="!isAuthenticated">
+                            <li><a href="login" class="dropdown-item">Login</a></li>
+                            <li><a href="register" class="dropdown-item">Register</a></li>
+                        </ng-container>
+                        <!-- Show Logout when authenticated -->
+                        <li *ngIf="isAuthenticated">
+                            <a class="dropdown-item" (click)="onLogout()">Logout</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="navbar-toggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </div>
+</nav>

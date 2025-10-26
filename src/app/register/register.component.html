@@ -1,0 +1,54 @@
+<div class="category-list-container">
+    <div class="header">
+        <h2>Register</h2>
+    </div>
+
+    <div class="category-table-wrapper">
+        <form (ngSubmit)="onSubmit()" class="add-form">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" [(ngModel)]="user.username" name="username" class="form-control"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" [(ngModel)]="user.email" name="email" class="form-control" required email
+                    pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                    title="Please enter a valid email address (e.g., user@domain.com)">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" [(ngModel)]="user.password" name="password" class="form-control"
+                    required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$"
+                    title="Password must be at least 8 characters long and contain uppercase, lowercase, numbers, and special characters">
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" [(ngModel)]="user.confirmPassword" name="confirmPassword"
+                    class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="role">Role</label>
+                <select id="role" [(ngModel)]="user.role" name="role" class="form-control" required>
+                    <option *ngFor="let role of roles" [value]="role">
+                        {{ role }}
+                    </option>
+                </select>
+            </div>
+
+            <button type="submit" class="action-btn edit-btn" [disabled]="loading">
+                {{ loading ? 'Registering...' : 'Register' }}
+            </button>
+
+            <div class="message-container">
+                <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+                <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+            </div>
+        </form>
+        <p>Already have an account? <a href="/login">Login</a></p>
+    </div>
+</div>

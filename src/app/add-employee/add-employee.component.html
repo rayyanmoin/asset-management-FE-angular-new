@@ -1,0 +1,56 @@
+<div class="category-list-container">
+    <div class="header">
+        <h2>{{ editMode ? 'Edit Employee' : 'Add New Employee' }}</h2>
+    </div>
+
+    <div class="category-table-wrapper">
+        <form (ngSubmit)="onSubmit()" class="add-form">
+            <div class="form-group">
+                <label for="employeeName">Employee Name</label>
+                <input type="text" id="employeeName" [(ngModel)]="employee.employeeName" name="employeeName"
+                    class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="contactEmail">Contact Email</label>
+                <input type="email" id="contactEmail" [(ngModel)]="employee.contactEmail" name="contactEmail"
+                    class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="contactPhone">Contact Phone</label>
+                <input type="tel" id="contactPhone" [(ngModel)]="employee.contactPhone" name="contactPhone"
+                    class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address</label>
+                <textarea id="address" [(ngModel)]="employee.address" name="address" class="form-control"
+                    rows="3" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="locationId">Location</label>
+                <select id="locationId" [(ngModel)]="employee.locationId" name="locationId" class="form-control"
+                    required>
+                    <option *ngFor="let location of locations" [value]="location.locationId">
+                        {{ location.locationName }}
+                    </option>
+                </select>
+            </div>
+
+            <!-- Add or Update Button -->
+            <button type="submit" class="action-btn" [ngClass]="editMode ? 'edit-btn' : 'edit-btn'"
+                [disabled]="loading || locations.length === 0">
+                {{ loading ? (editMode ? 'Updating...' : 'Adding...') : (editMode ? 'Update Employee' : 'Add Employee')
+                }}
+            </button>
+
+            <!-- Messages -->
+            <div class="message-container">
+                <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+                <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+            </div>
+        </form>
+    </div>
+</div>

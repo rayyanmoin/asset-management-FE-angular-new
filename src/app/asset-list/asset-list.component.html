@@ -1,0 +1,40 @@
+<!-- asset-list.component.html -->
+<div class="asset-list-container">
+  <div class="header">
+    <h2>Asset Inventory</h2>
+  </div>
+
+  <div class="table-wrapper">
+    <table class="asset-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Asset Name</th>
+          <th>Description</th>
+          <th>Category</th>
+          <th>Cost</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let asset of assets">
+          <td>{{ asset.assetId }}</td>
+          <td>{{ asset.assetName }}</td>
+          <td>{{ asset.description }}</td>
+          <td>{{ asset.categoryDetails.categoryName }}</td>
+          <td>${{ asset.cost | number: '1.2-2' }}</td>
+          <td>
+            <button
+              class="action-btn edit-btn"
+              (click)="editAsset(asset)"
+              [disabled]="isUser()"
+              [ngClass]="{ 'disabled-btn': isUser() }"
+              [title]="isUser() ? 'You do not have permission to edit' : 'Edit Asset'">
+              Edit
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
