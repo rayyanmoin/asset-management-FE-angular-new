@@ -1,66 +1,105 @@
 <div class="category-list-container">
-    <div class="header">
-        <h2>{{ editMode ? 'Edit Supplier' : 'Add New Supplier' }}</h2>
-    </div>
+  <div class="header">
+    <h2>{{ editMode ? 'Edit Supplier' : 'Add New Supplier' }}</h2>
+  </div>
 
-    <div class="category-table-wrapper">
-        <form (ngSubmit)="onSubmit()" class="add-form">
-            <div class="form-group">
-                <label for="supplierName">Supplier Name</label>
-                <input type="text" id="supplierName" [(ngModel)]="supplier.supplierName" name="supplierName"
-                    class="form-control" required>
-            </div>
+  <div class="category-table-wrapper">
+    <form (ngSubmit)="onSubmit()" class="add-form">
+      <div class="form-group">
+        <label for="supplierName">Supplier Name</label>
+        <input type="text" id="supplierName" [(ngModel)]="supplier.supplierName" name="supplierName"
+          class="form-control" required>
+      </div>
 
-            <div class="form-group">
-                <label for="contactName">Contact Name</label>
-                <input type="text" id="contactName" [(ngModel)]="supplier.contactName" name="contactName"
-                    class="form-control" required>
-            </div>
+      <div class="form-group">
+        <label for="contactName">Contact Name</label>
+        <input type="text" id="contactName" [(ngModel)]="supplier.contactName" name="contactName"
+          class="form-control" required>
+      </div>
 
-            <div class="form-group">
-                <label for="contactEmail">Contact Email</label>
-                <input type="email" id="contactEmail" [(ngModel)]="supplier.contactEmail" name="contactEmail"
-                    class="form-control" required>
-            </div>
+      <div class="form-group">
+        <label for="contactEmail">Contact Email</label>
+        <input type="email" id="contactEmail" [(ngModel)]="supplier.contactEmail" name="contactEmail"
+          class="form-control" required>
+      </div>
 
-            <div class="form-group">
-                <label for="contactPhone">Contact Phone</label>
-                <input type="tel" id="contactPhone" [(ngModel)]="supplier.contactPhone" name="contactPhone"
-                    class="form-control" required>
-            </div>
+      <div class="form-group">
+        <label for="contactPhone">Contact Phone</label>
+        <input type="tel" id="contactPhone" [(ngModel)]="supplier.contactPhone" name="contactPhone"
+          class="form-control" required>
+      </div>
 
-            <div class="form-group">
-                <label for="address">Address</label>
-                <textarea id="address" [(ngModel)]="supplier.address" name="address" class="form-control" rows="3"
-                    required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="registrationNo">Registration No.</label>
-                <input type="text" id="registrationNo" [(ngModel)]="supplier.registrationNo" name="registrationNo"
-                    class="form-control" required>
-            </div>
+      <div class="form-group">
+        <label for="address">Address</label>
+        <textarea id="address" [(ngModel)]="supplier.address" name="address" class="form-control" rows="3"
+          required></textarea>
+      </div>
 
-            <div class="form-group">
-                <label for="status">Status</label>
-                <select id="status" [(ngModel)]="supplier.status" name="status" class="form-control" required>
-                    <option value="active">Active</option>
-                    <option value="inactive">Inactive</option>
-                    <option value="blacklisted">Blacklisted</option>
-                </select>
-            </div>
+      <div class="form-group">
+        <label for="registrationNo">Registration No.</label>
+        <input type="text" id="registrationNo" [(ngModel)]="supplier.registrationNo" name="registrationNo"
+          class="form-control" required>
+      </div>
 
-            <!-- Add or Update Button -->
-            <button type="submit" class="action-btn" [ngClass]="editMode ? 'edit-btn' : 'edit-btn'"
-                [disabled]="loading">
-                {{ loading ? (editMode ? 'Updating...' : 'Adding...') : (editMode ? 'Update Supplier' : 'Add Supplier')
-                }}
-            </button>
+     <!-- Country and City Selection -->
+<div class="row">
+  <!-- Country Dropdown -->
+  <div class="col-md-6 mb-3">
+    <label for="country" class="form-label">Country</label>
+    <select
+      id="country"
+      [(ngModel)]="supplier.country"
+      name="country"
+      (change)="onCountryChange()"
+      class="form-control"
+      required
+    >
+      <option value="" disabled selected>Select Country</option>
+      <option *ngFor="let country of countries" [value]="country">
+        {{ country }}
+      </option>
+    </select>
+  </div>
 
-            <!-- Messages -->
-            <div class="message-container">
-                <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
-                <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
-            </div>
-        </form>
-    </div>
+  <!-- City Dropdown -->
+  <div class="col-md-6 mb-3">
+    <label for="city" class="form-label">City</label>
+    <select
+      id="city"
+      [(ngModel)]="supplier.city"
+      name="city"
+      class="form-control"
+      required
+      [disabled]="!filteredCities.length"
+    >
+      <option value="" disabled selected>Select City</option>
+      <option *ngFor="let city of filteredCities" [value]="city">
+        {{ city }}
+      </option>
+    </select>
+  </div>
+</div>
+
+
+      <div class="form-group">
+        <label for="status">Status</label>
+        <select id="status" [(ngModel)]="supplier.status" name="status" class="form-control" required>
+          <option value="active">Active</option>
+          <option value="inactive">Inactive</option>
+          <option value="blacklisted">Blacklisted</option>
+        </select>
+      </div>
+
+      <!-- Add or Update Button -->
+      <button type="submit" class="action-btn" [ngClass]="editMode ? 'edit-btn' : 'edit-btn'" [disabled]="loading">
+        {{ loading ? (editMode ? 'Updating...' : 'Adding...') : (editMode ? 'Update Supplier' : 'Add Supplier') }}
+      </button>
+
+      <!-- Messages -->
+      <div class="message-container">
+        <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+        <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+      </div>
+    </form>
+  </div>
 </div>

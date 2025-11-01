@@ -14,6 +14,8 @@ interface Supplier {
   contactEmail: string;
   contactPhone: string;
   address: string;
+  country: string;
+  city: string;
   registrationNo: string;
   status: string;
 }

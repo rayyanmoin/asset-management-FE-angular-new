@@ -3,16 +3,18 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import countriesData from './countries-data.json';
 
-// Define the Supplier interface
 interface Supplier {
-  id?: number; // Added ID for updating existing suppliers
+  id?: number;
   supplierName: string;
   contactName: string;
   contactEmail: string;
   contactPhone: string;
   address: string;
   registrationNo: string;
+  country: string;
+  city: string;
   status: string;
 }
 
@@ -34,18 +36,43 @@ export class AddSupplierComponent {
     contactPhone: '',
     address: '',
     registrationNo: '',
+    country: '',
+    city: '',
     status: ''
   };
-  loading: boolean = false;
-  successMessage: string = '';
-  errorMessage: string = '';
-  editMode: boolean = false;
+
+  loading = false;
+  successMessage = '';
+  errorMessage = '';
+  editMode = false;
+
+  countries: string[] = [];
+  citiesByCountry: { [key: string]: string[] } = {};
+  filteredCities: string[] = [];
 
   constructor(private http: HttpClient, private router: Router) {
     const navigation = this.router.getCurrentNavigation();
     if (navigation?.extras.state?.['supplier']) {
-      this.supplier = navigation.extras.state?.['supplier'];
-      this.editMode = true; // Set edit mode to true if supplier data is passed
+      this.supplier = navigation.extras.state['supplier'];
+      this.editMode = true;
+    }
+
+    // ✅ Load country/city data directly from JSON import
+    this.countries = countriesData.countries;
+    this.citiesByCountry = countriesData.citiesByCountry;
+
+    // ✅ Pre-fill cities when editing
+    if (this.editMode && this.supplier.country) {
+      this.onCountryChange();
+    }
+  }
+
+  onCountryChange() {
+    const selectedCountry = this.supplier.country;
+    this.filteredCities = this.citiesByCountry[selectedCountry] || [];
+    // Keep the selected city if valid; otherwise reset it
+    if (!this.filteredCities.includes(this.supplier.city)) {
+      this.supplier.city = '';
     }
   }
 
@@ -66,7 +93,6 @@ export class AddSupplierComponent {
     }
   }
 
-  // Add new supplier
   private addSupplier() {
     this.http.post(this.addApiUrl, this.supplier, { responseType: 'text' }).subscribe({
       next: (response) => {
@@ -82,7 +108,6 @@ export class AddSupplierComponent {
     });
   }
 
-  // Update existing supplier
   private updateSupplier() {
     this.http.put(this.updateApiUrl, this.supplier, { responseType: 'text' }).subscribe({
       next: (response) => {
@@ -97,7 +122,6 @@ export class AddSupplierComponent {
     });
   }
 
-  // Validation method
   private isFormValid(): boolean {
     return (
       this.supplier.supplierName.trim() !== '' &&
@@ -106,11 +130,12 @@ export class AddSupplierComponent {
       this.supplier.contactPhone.trim() !== '' &&
       this.supplier.address.trim() !== '' &&
       this.supplier.registrationNo.trim() !== '' &&
+      this.supplier.country.trim() !== '' &&
+      this.supplier.city.trim() !== '' &&
       this.supplier.status.trim() !== ''
     );
   }
 
-  // Reset form method
   private resetForm(): void {
     this.supplier = {
       supplierName: '',
@@ -119,12 +144,14 @@ export class AddSupplierComponent {
       contactPhone: '',
       address: '',
       registrationNo: '',
+      country: '',
+      city: '',
       status: ''
     };
+    this.filteredCities = [];
     this.editMode = false;
   }
 
-  // Cancel edit mode
   cancelEdit() {
     this.resetForm();
     this.successMessage = '';
