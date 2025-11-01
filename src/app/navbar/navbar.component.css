@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap');
 
 .navbar {
-    background: #2c3e50;
+    background: #1b417a;
     padding: 15px 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: fixed;
@@ -34,7 +34,7 @@
 }
 
 .brand-link:hover {
-    color: #3498db;
+    color: #1b417a;
 }
 
 .navbar-menu {
@@ -60,8 +60,8 @@
 }
 
 .nav-link:hover {
-    background: #34495e;
-    color: #3498db;
+    background: #1b417a;
+    color: #042d49;
 }
 
 /* Dropdown Styles */
@@ -78,7 +78,7 @@
     position: absolute;
     top: 100%;
     left: 0;
-    background: #2c3e50;
+    background: #1b417a;
     min-width: 200px;
     list-style: none;
     padding: 8px 0;
@@ -111,8 +111,8 @@
 }
 
 .dropdown-item:hover {
-    background: #34495e;
-    color: #3498db;
+    background: #1b417a;
+    color: #042d49;
 }
 
 .navbar-toggle {
@@ -124,7 +124,7 @@
 .bar {
     width: 25px;
     height: 3px;
-    background: #ffffff;
+    background: #1b417a;
     margin: 2px 0;
     transition: all 0.3s ease;
 }
@@ -141,7 +141,7 @@
         position: absolute;
         top: 60px;
         left: 0;
-        background: #2c3e50;
+        background: #1b417a;
     }
 
     .navbar-menu.active {
@@ -156,14 +156,14 @@
     .nav-link {
         display: block;
         padding: 15px 20px;
-        border-bottom: 1px solid #34495e;
+        border-bottom: 1px solid #1b417a;
     }
 
     .dropdown-menu {
         position: static;
         width: 100%;
         box-shadow: none;
-        background: #34495e;
+        background:#1b417a;
         padding: 0;
         /* Remove padding in mobile view */
         border-radius: 0;
@@ -182,7 +182,7 @@
     .dropdown-item {
         padding: 12px 30px;
         /* Slightly indented in mobile view */
-        border-bottom: 1px solid #3d566e;
+        border-bottom: 1px solid #1b417a;
         /* Subtle separator */
     }
 }

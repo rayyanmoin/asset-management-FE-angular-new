@@ -8,7 +8,7 @@
 }
 
 .header {
-  background: #2c3e50;
+  background: #264f79;
   padding: 15px 20px;
   border-radius: 8px 8px 0 0;
   margin-bottom: 2px;
@@ -41,13 +41,13 @@
 
 .info-section h3 {
   font-size: 24px;
-  color: #2c3e50;
+  color: #264f79;
   margin: 0 0 10px;
 }
 
 .info-section h4 {
   font-size: 20px;
-  color: #34495e;
+  color: #264f79;
   margin: 0 0 10px;
 }
 
@@ -75,12 +75,12 @@
 }
 
 .edit-btn {
-  background: #16a085;
+  background: #084e40;
   color: #ffffff;
 }
 
 .edit-btn:hover:not(:disabled) {
-  background: #138d75;
+  background: #084e40;
 }
 
 /* ✅ Greyed-out state for user role */
@@ -96,12 +96,12 @@ button:disabled {
 }
 
 .back-btn {
-  background: #34495e;
+  background: #264f79;
   color: #ffffff;
 }
 
 .back-btn:hover {
-  background: #2c3e50;
+  background: #264f79;
 }
 
 .not-found {

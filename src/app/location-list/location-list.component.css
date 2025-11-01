@@ -8,7 +8,7 @@
 }
 
 .header {
-  background: #2c3e50;
+  background: #264f79;
   padding: 15px 20px;
   border-radius: 8px 8px 0 0;
   margin-bottom: 2px;
@@ -25,7 +25,7 @@
 .loading {
   text-align: center;
   font-size: 18px;
-  color: #34495e;
+  color: #264f79;
   padding: 20px;
 }
 
@@ -43,7 +43,7 @@
 }
 
 .category-table thead {
-  background: #34495e;
+  background: #264f79;
   color: #ffffff;
 }
 
@@ -81,12 +81,12 @@
 }
 
 .edit-btn {
-  background: #16a085;
+  background: #084e40;
   color: #ffffff;
 }
 
 .edit-btn:hover:not(:disabled) {
-  background: #138d75;
+  background: #084e40;
 }
 
 /* ✅ Disabled (greyed-out) edit button style */
