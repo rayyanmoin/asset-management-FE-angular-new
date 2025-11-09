@@ -11,6 +11,8 @@ interface Location {
   locationId: number;
   locationName: string;
   locationCode: string;
+  country: string;
+  city: string;
   locationDescription: string;
 }
 

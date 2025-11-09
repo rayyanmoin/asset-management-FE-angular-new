@@ -3,11 +3,14 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import countriesData from './../add-supplier/countries-data.json';
 
 // Define the Location interface
 interface Location {
   locationName: string;
   locationCode: string;
+  country: string;
+  city: string;
   locationDescription: string;
 }
 
@@ -26,6 +29,8 @@ export class AddLocationComponent {
   location: Location = {
     locationName: '',
     locationCode: '',
+    country: '',
+    city: '',
     locationDescription: ''
   };
   loading: boolean = false;
@@ -33,11 +38,32 @@ export class AddLocationComponent {
   errorMessage: string = '';
   editMode: boolean = false;
 
+  countries: string[] = [];
+  citiesByCountry: { [key: string]: string[] } = {};
+  filteredCities: string[] = [];
+
   constructor(private http: HttpClient, private router: Router) {
     const navigation = this.router.getCurrentNavigation();
     if (navigation?.extras.state?.['location']) {
       this.location = navigation.extras.state['location'];
       this.editMode = true; // Set edit mode if location data exists
+    }
+       // ✅ Load country/city data directly from JSON import
+    this.countries = countriesData.countries;
+    this.citiesByCountry = countriesData.citiesByCountry;
+
+    // ✅ Pre-fill cities when editing
+    if (this.editMode && this.location.country) {
+      this.onCountryChange();
+    }
+  }
+
+  onCountryChange() {
+    const selectedCountry = this.location.country;
+    this.filteredCities = this.citiesByCountry[selectedCountry] || [];
+    // Keep the selected city if valid; otherwise reset it
+    if (!this.filteredCities.includes(this.location.city)) {
+      this.location.city = '';
     }
   }
 
@@ -103,6 +129,8 @@ export class AddLocationComponent {
     this.location = {
       locationName: '',
       locationCode: '',
+      country: '',
+      city: '',
       locationDescription: ''
     };
     this.editMode = false;

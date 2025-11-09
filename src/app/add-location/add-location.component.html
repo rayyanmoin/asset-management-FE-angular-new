@@ -17,6 +17,46 @@
                     class="form-control" required>
             </div>
 
+               <!-- Country and City Selection -->
+<div class="row">
+  <!-- Country Dropdown -->
+  <div class="col-md-6 mb-3">
+    <label for="country" class="form-label">Country</label>
+    <select
+      id="country"
+      [(ngModel)]="location.country"
+      name="country"
+      (change)="onCountryChange()"
+      class="form-control"
+      required
+    >
+      <option value="" disabled selected>Select Country</option>
+      <option *ngFor="let country of countries" [value]="country">
+        {{ country }}
+      </option>
+    </select>
+  </div>
+
+  <!-- City Dropdown -->
+  <div class="col-md-6 mb-3">
+    <label for="city" class="form-label">City</label>
+    <select
+      id="city"
+      [(ngModel)]="location.city"
+      name="city"
+      class="form-control"
+      required
+      [disabled]="!filteredCities.length"
+    >
+      <option value="" disabled selected>Select City</option>
+      <option *ngFor="let city of filteredCities" [value]="city">
+        {{ city }}
+      </option>
+    </select>
+  </div>
+</div>
+
+
             <div class="form-group">
                 <label for="locationDescription">Location Description</label>
                 <input type="text" id="locationDescription" [(ngModel)]="location.locationDescription" name="locationDescription"
